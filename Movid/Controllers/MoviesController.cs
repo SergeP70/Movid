@@ -10,6 +10,36 @@ namespace Movid.Controllers
 {
     public class MoviesController : Controller
     {
+        //movies
+        public ActionResult Index()
+        {
+            var movies = GetMovies();
+
+            return View(movies);
+        }
+
+        public ActionResult Details(int id)
+        {
+            var movie = GetMovies().ToList().SingleOrDefault(m => m.Id == id) ;
+
+            return View(movie);
+        }
+
+        private List<Movie> GetMovies()
+        {
+            return new List<Movie>
+            {
+                new Movie{Id = 1, Name = "Shrek" },
+                new Movie{Id = 2, Name = "The Terminator" },
+                new Movie{Id = 3, Name = "Gladiator" },
+                new Movie{Id = 4, Name = "Mission Impossible" },
+                new Movie{Id = 5, Name = "Face Off" }
+
+            };
+            
+        }
+
+
         // GET: Movies/Random
         public ActionResult Random()
         {
@@ -39,7 +69,8 @@ namespace Movid.Controllers
             return Content("id = " + id);
         }
 
-        //movies
+
+        /*movies
         public ActionResult Index(int? pageIndex, string sortBy)
         {
             if (!pageIndex.HasValue)
@@ -57,6 +88,7 @@ namespace Movid.Controllers
         {
             return Content(year + "/" + month);
         }
+        */
 
     }
 }
